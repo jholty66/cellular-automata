@@ -1,7 +1,18 @@
 #include <stdio.h>
-#include <windows.h>
 
-#define size 16
+#ifdef _WIN32
+#include <Windows.h>
+void clear() {
+	system("cls");
+} 
+#else
+#include <unistd.h>
+void clear() {
+	system("clear");
+} 
+#endif
+
+#define size 64
 
 static int generation = 0;
 
@@ -25,7 +36,7 @@ static int universe[size][size] = {
 };
 
 void show() {
-	system("cls");
+	clear();
 	printf("%i\n", generation);
 	for (int i = 0; i < size; ++i) {
 		for (int j = 0; j < size; ++j) {
@@ -71,6 +82,6 @@ int main(void) {
 	for (;;) {
 		generate();
 		show();
-		Sleep(100);
+		sleep(1);
 	}
 }
