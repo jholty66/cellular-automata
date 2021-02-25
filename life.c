@@ -2,14 +2,10 @@
 
 #ifdef _WIN32
 #include <Windows.h>
-void clear() {
-	system("cls");
-} 
+#define CLEAR "cls"
 #else
 #include <unistd.h>
-void clear() {
-	system("clear");
-} 
+#define CLEAR "clear"
 #endif
 
 #define size 64
@@ -36,7 +32,7 @@ static int universe[size][size] = {
 };
 
 void show() {
-	clear();
+	system(CLEAR);
 	printf("%i\n", generation);
 	for (int i = 0; i < size; ++i) {
 		for (int j = 0; j < size; ++j) {
